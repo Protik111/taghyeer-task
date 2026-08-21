@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-inter);
+}
+
+@theme {
+  /* Surfaces */
+  --color-base: #030a2e;
+  --color-deep: #020928;
+  --color-card: #051251;
+  --color-card-alt: #040d3d;
+  --color-navy: #061665;
+  --color-border: #384584;
+
+  /* Accent */
+  --color-pink: #ff379e;
+  --color-magenta: #e018e0;
+  --color-magenta-light: #e646e6;
+  --color-plum: #912491;
+  --color-blue: #2262ee;
+  --color-cyan: #00ffd2;
+
+  /* Light / Text */
+  --color-text: #ebecf3;
+  --color-white: #ffffff;
+  --color-sky: #8ec8ee;
+  --color-pale-blue: #d7e2fb;
+  --color-pale-blue-2: #ecf2fd;
+  --color-ice-blue: #ebf7ff;
+
+  /* Typography scale (desktop reference values, see AGENTS.md/spec) */
+  --text-hero: 4.25rem; /* 68px */
+  --text-hero--line-height: 1.04;
+  --text-hero--letter-spacing: -0.02em;
+
+  --text-page-title: 3.75rem; /* 60px */
+  --text-page-title--line-height: 1.08;
+  --text-page-title--letter-spacing: -0.02em;
+
+  --text-section: 3rem; /* 48px */
+  --text-section--line-height: 1.12;
+  --text-section--letter-spacing: -0.01em;
+
+  --text-subheading: 2.25rem; /* 36px */
+  --text-subheading--line-height: 1.2;
+
+  --text-card-title: 1.375rem; /* 22px */
+  --text-card-title--line-height: 1.3;
+
+  --text-lead: 1.25rem; /* 20px */
+  --text-lead--line-height: 1.5;
+
+  --text-body: 1.125rem; /* 18px */
+  --text-body--line-height: 1.6;
+
+  --text-default: 1rem; /* 16px */
+  --text-default--line-height: 1.5;
+
+  --text-meta: 0.75rem; /* 12px */
+  --text-meta--line-height: 1.4;
+  --text-meta--letter-spacing: 0.04em;
+
+  --text-micro: 0.625rem; /* 10px */
+  --text-micro--line-height: 1.4;
+  --text-micro--letter-spacing: 0.08em;
+
+  /* Radii */
+  --radius-card: 12px;
+  --radius-pill: 34px;
+  --radius-badge: 20px;
+  --radius-arrow: 57px;
+  --radius-chip: 4px;
+
+  /* Layout */
+  --breakpoint-3xl: 1440px;
+}
+
+/* Global safety net: 3D-transformed content (e.g. the campus
+   carousel's coverflow effect) can extend past an ordinary ancestor's
+   `overflow: clip`/`hidden` for scrollWidth purposes even while
+   rendering correctly clipped on screen — a known cross-browser quirk
+   with perspective/3D compositing layers. This has to be `hidden`,
+   not `clip`, and it has to live on `html`, not `body`: `clip` on the
+   root element did not actually stop real scrolling in testing
+   (confirmed via a live scroll attempt, not just measuring
+   `scrollWidth`), where `hidden` — the long-established, reliably
+   supported way to disable root scrolling — does. */
+html {
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--color-base);
+  color: var(--color-text);
+}
+
+/* Visible focus state for keyboard users, applied globally so no
+   interactive element is left without one. */
+:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Hide scrollbar for horizontally scroll-snapped strips (gallery/carousel)
+   while keeping them keyboard- and touch-scrollable. */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
