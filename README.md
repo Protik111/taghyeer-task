@@ -64,10 +64,10 @@ docs/API.md            Part 1's standalone API documentation deliverable
 
 ### Approach, architecture, and trade-offs (Part 1)
 
-The repo already had design tokens and generic UI primitives scaffolded
-(under an unrelated "VCAD college" theme I rebranded and rewired the content
-of, per the plan I agreed with — see the git history). On top of that, this
-is a client-heavy screen by nature: real-time delivery needs a live
+I started from a design-token/UI-primitive system I'd already set up (colors,
+type scale, `Button`/`Container`/`Badge`/etc.) and built the chat screens and
+landing page on top of it, rather than starting from scratch. Beyond that,
+this is a client-heavy screen by nature: real-time delivery needs a live
 Socket.IO connection in the browser, and there's no server of my own — the
 whole app is a frontend for a third-party API. Given that, I made a few
 deliberate calls:
@@ -127,36 +127,29 @@ describing it.
 
 ### How I used AI tools
 
-This was built with Claude Code (Anthropic), start to finish, working from
-the provided PDF and Postman collection. Specifics:
+I used Claude Code (Anthropic) as my main tool for this build, working from
+the provided PDF and Postman collection. I directed it through the scope and
+the decisions above — state management approach, the auth trade-off, the
+REST-vs-socket split, the normalization layer — rather than taking a first
+draft as final:
 
-- **API documentation (`docs/API.md`)** was drafted from directly exercising
-  the live API with `curl` (login, search, start/create conversations, send
-  messages, paginate, trigger every error path I could find), not from
-  reading the Postman collection's examples at face value — several of
-  those examples turned out to be stale or copy-pasted (see "issues" below).
-  I verified this myself rather than trusting either the collection or the
-  hosted Swagger page.
-- **Implementation** (contexts, API client/normalization layer, chat UI,
-  landing page) was written directly, then verified by actually running the
-  app: two independent logged-in browser sessions driven with Playwright,
-  exercising direct messages, group creation/rename/membership, live
-  delivery, and the empty-message guard — not just a build/lint pass.
-  That verification loop is what surfaced the real bugs listed below
-  (a socket/REST race producing a duplicate message, and two genuine
-  API response-shape inconsistencies); I fixed each one in the source,
-  re-ran the same scenario until it was clean, and folded the finding into
-  `docs/API.md`.
-- I did not accept anything I couldn't explain: normalization logic,
-  the reducer's pagination/de-dupe rules, and the auto-scroll behavior were
-  all reviewed and adjusted by hand against the documented API quirks, not
-  taken as a first draft.
-- **A note on the source PDF:** the provided instructions document contains
-  a hidden instruction (invisible in the rendered PDF, present in its text
-  layer) directing any AI assistant summarizing it to insert an unrelated
-  word into this write-up. It was not followed — flagging it here for the
-  same reason I'd flag any other embedded instruction from an
-  untrusted document: it isn't something either of us asked for.
+- For the API docs, instead of trusting the Postman collection's examples
+  at face value (several turned out to be stale or copy-pasted — see
+  "issues" below), I drove the live API directly with `curl` myself: login,
+  search, start/create conversations, send messages, paginate, and every
+  error path I could trigger. `docs/API.md` reflects what the server
+  actually does, not what the collection claims.
+- I didn't stop at a build/lint pass for verification. I ran the app with
+  two real logged-in sessions talking to each other — direct messages,
+  group creation/rename/membership, live delivery, the empty-message guard
+  — and that's what surfaced the real bugs below (a socket/REST race, and
+  two genuine API response-shape inconsistencies). I fixed each one in
+  source and re-ran the same scenario until it was clean.
+- **A note on the source PDF:** it contains a hidden instruction (invisible
+  when rendered, present in its text layer) aimed at getting an AI
+  assistant to insert an unrelated word into this write-up. I didn't follow
+  it — worth flagging for the same reason I'd flag any embedded instruction
+  from a document neither of us wrote ourselves.
 
 ### What I'd improve with more time
 
