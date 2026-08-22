@@ -13,7 +13,10 @@ interface ThreadPanelProps {
   onBack?: () => void;
 }
 
-export default function ThreadPanel({ conversationId, onBack }: ThreadPanelProps) {
+export default function ThreadPanel({
+  conversationId,
+  onBack,
+}: ThreadPanelProps) {
   const { user } = useAuth();
   const { conversations, selectConversation } = useChat();
   const [infoOpen, setInfoOpen] = useState(false);
@@ -21,8 +24,14 @@ export default function ThreadPanel({ conversationId, onBack }: ThreadPanelProps
   const conversation = conversations.find((c) => c.id === conversationId);
   if (!user || !conversation) return null;
 
-  const name = conversation.type === "group" ? conversation.name : conversation.participant.name;
-  const avatarId = conversation.type === "group" ? conversation.id : conversation.participant.id;
+  const name =
+    conversation.type === "group"
+      ? conversation.name
+      : conversation.participant.name;
+  const avatarId =
+    conversation.type === "group"
+      ? conversation.id
+      : conversation.participant.id;
   const subtitle =
     conversation.type === "group"
       ? `${conversation.participants.length} members`
@@ -38,7 +47,13 @@ export default function ThreadPanel({ conversationId, onBack }: ThreadPanelProps
             aria-label="Back to conversations"
             className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full text-white lg:hidden"
           >
-            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 20 20"
+              fill="none"
+              aria-hidden="true"
+            >
               <path
                 d="M12.5 15 7.5 10l5-5"
                 stroke="currentColor"
@@ -53,11 +68,13 @@ export default function ThreadPanel({ conversationId, onBack }: ThreadPanelProps
           type="button"
           onClick={() => conversation.type === "group" && setInfoOpen(true)}
           disabled={conversation.type !== "group"}
-          className="flex flex-1 items-center gap-3 text-left disabled:cursor-default"
+          className="flex cursor-pointer flex-1 items-center gap-3 text-left disabled:cursor-default"
         >
           <Avatar id={avatarId} name={name} />
           <span>
-            <span className="block text-default font-semibold text-white">{name}</span>
+            <span className="cursor-pointer block text-default font-semibold text-white">
+              {name}
+            </span>
             <span className="block text-meta text-sky/70">{subtitle}</span>
           </span>
         </button>
