@@ -132,7 +132,7 @@ export default function GroupInfoPanel({
             <button
               type="button"
               onClick={() => setAddingPeople((v) => !v)}
-              className="cursor-pointer text-meta font-semibold text-plum"
+              className="cursor-pointer text-meta font-semibold text-cyan hover:underline"
             >
               {addingPeople ? "Done" : "Add people"}
             </button>
@@ -165,7 +165,10 @@ export default function GroupInfoPanel({
                     className="flex w-full cursor-pointer items-center gap-2 rounded-chip px-2 py-1.5 text-left hover:bg-navy/50 disabled:opacity-50"
                   >
                     <Avatar id={u.id} name={u.name} size="sm" />
-                    <span className="text-default text-white">{u.name}</span>
+                    <span className="flex-1 text-default text-white">{u.name}</span>
+                    <span className="text-meta font-semibold text-cyan">
+                      {busyId === u.id ? "Adding…" : "Add"}
+                    </span>
                   </button>
                 </li>
               ))}
