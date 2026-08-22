@@ -4,37 +4,28 @@ interface LogoMarkProps {
 }
 
 /**
- * The VCAD mark — a navy rounded-square badge with an abstract
- * triangle/blob motif in the accent palette. Paths copied exactly
- * from the supplied `logo.svg` so it always matches the real brand
- * mark instead of an approximation.
+ * The product mark: two overlapping speech-bubble shapes in the site's
+ * accent palette — a small original mark rather than a literal chat
+ * bubble icon, built from the same tokens as the rest of the UI.
  */
 export default function LogoMark({ size, className }: LogoMarkProps) {
   return (
     <svg
-      width={size ?? 42}
-      height={size ?? 38}
-      viewBox="0 0 50 50"
+      width={size ?? 36}
+      height={size ?? 36}
+      viewBox="0 0 36 36"
       fill="none"
       aria-hidden="true"
       className={className}
     >
-      <path d="M49.3125 0H0V49.3477H49.3125V0Z" fill="#061665" />
+      <rect width="36" height="36" rx="10" fill="#061665" />
       <path
-        d="M4.50696 6.23651L14.7575 22.801L25.0052 6.23651H4.50696Z"
-        fill="#FF379E"
-      />
-      <path
-        d="M4.5069 42.9053H25.0051L14.7574 26.3409L4.5069 42.9053Z"
-        fill="#8EC8EE"
-      />
-      <path
-        d="M36.1138 22.7983H44.353V6.23385H36.1138C25.2821 6.41955 25.2878 22.6126 36.1138 22.7983Z"
+        d="M8 12.5C8 10.567 9.567 9 11.5 9H20.5C22.433 9 24 10.567 24 12.5V16.5C24 18.433 22.433 20 20.5 20H14L9.5 23V20H11.5C9.567 20 8 18.433 8 16.5V12.5Z"
         fill="#00FFD2"
       />
       <path
-        d="M36.6865 43.111H28.4473V26.5466H36.6865C47.5182 26.7323 47.5125 42.9253 36.6865 43.111Z"
-        fill="#E018E0"
+        d="M15 18.5C15 16.567 16.567 15 18.5 15H24.5C26.433 15 28 16.567 28 18.5V21.5C28 23.433 26.433 25 24.5 25H24V27.5L20.8 25H18.5C16.567 25 15 23.433 15 21.5V18.5Z"
+        fill="#FF379E"
       />
     </svg>
   );
