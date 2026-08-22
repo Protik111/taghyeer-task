@@ -40,23 +40,6 @@ export default function NavLinks() {
                   </span>
                 )}
                 {link.label}
-                {link.hasSubmenu && (
-                  <svg
-                    width="10"
-                    height="10"
-                    viewBox="0 0 10 10"
-                    fill="none"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="m2.5 3.5 2.5 3 2.5-3"
-                      stroke="currentColor"
-                      strokeWidth="1.3"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                )}
               </Link>
             </li>
           );

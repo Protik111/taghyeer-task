@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/cn";
 import { homeNav, primaryNav } from "@/data/navigation";
 import Button from "@/components/ui/Button";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface MobileMenuProps {
   /** Homepage keeps the menu button visible at every breakpoint. */
@@ -23,6 +24,7 @@ export default function MobileMenu({ alwaysVisible = false }: MobileMenuProps) {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const links = isHome ? homeNav : primaryNav;
+  const { status } = useAuth();
 
   useEffect(() => {
     if (!open) return;
@@ -118,15 +120,13 @@ export default function MobileMenu({ alwaysVisible = false }: MobileMenuProps) {
               </ul>
             </nav>
 
-            {!isHome && (
-              <Button
-                href="/apply"
-                variant="solid"
-                className="mt-auto justify-center"
-              >
-                Apply Now
-              </Button>
-            )}
+            <Button
+              href={status === "authenticated" ? "/chat" : "/login"}
+              variant="solid"
+              className="mt-auto justify-center"
+            >
+              {status === "authenticated" ? "Open Chat" : "Log In"}
+            </Button>
           </div>
         </div>
       )}
