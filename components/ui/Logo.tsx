@@ -14,7 +14,7 @@ export default function Logo() {
       className="flex items-center gap-2.5 rounded-chip focus-visible:outline-offset-4"
       aria-label="Loopin, go to homepage"
     >
-      <LogoMark />
+      <LogoMark linkToHome={false} />
       <span className="text-xl font-bold tracking-tight text-white">Loopin</span>
     </Link>
   );

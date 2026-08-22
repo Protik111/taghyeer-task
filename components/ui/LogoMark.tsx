@@ -1,6 +1,13 @@
+import Link from "next/link";
+import { cn } from "@/lib/cn";
+
 interface LogoMarkProps {
   size?: number;
   className?: string;
+  /** Wraps the mark in a link to "/". Defaults to true — pass `false`
+   * when a parent (e.g. `Logo`) already provides its own surrounding
+   * link, so the mark doesn't end up nested inside another `<a>`. */
+  linkToHome?: boolean;
 }
 
 /**
@@ -8,15 +15,15 @@ interface LogoMarkProps {
  * accent palette — a small original mark rather than a literal chat
  * bubble icon, built from the same tokens as the rest of the UI.
  */
-export default function LogoMark({ size, className }: LogoMarkProps) {
-  return (
+export default function LogoMark({ size, className, linkToHome = true }: LogoMarkProps) {
+  const svg = (
     <svg
       width={size ?? 36}
       height={size ?? 36}
       viewBox="0 0 36 36"
       fill="none"
       aria-hidden="true"
-      className={className}
+      className={linkToHome ? undefined : className}
     >
       <rect width="36" height="36" rx="10" fill="#061665" />
       <path
@@ -28,5 +35,20 @@ export default function LogoMark({ size, className }: LogoMarkProps) {
         fill="#FF379E"
       />
     </svg>
+  );
+
+  if (!linkToHome) return svg;
+
+  return (
+    <Link
+      href="/"
+      aria-label="Loopin, go to homepage"
+      className={cn(
+        "inline-flex rounded-chip focus-visible:outline-offset-4",
+        className,
+      )}
+    >
+      {svg}
+    </Link>
   );
 }
