@@ -1,23 +1,15 @@
 export interface NavLink {
   label: string;
   href: string;
-  /** Has a submenu affordance in the design (chevron), even though no
-   * submenu content was specified — rendered as a plain link so the
-   * chevron never implies an interaction that doesn't exist. */
-  hasSubmenu?: boolean;
 }
 
-/** Nav shown on every page except the homepage, alongside the "Apply Now" CTA. */
+/** The marketing site is currently a single page, so both nav sets point
+ * at in-page sections — kept as two exports (rather than folding into
+ * one) so Header/NavLinks/MobileMenu don't need reshaping if more
+ * marketing routes show up later. */
 export const primaryNav: NavLink[] = [
-  { label: "About VCAD", href: "/about", hasSubmenu: true },
-  { label: "Courses", href: "/courses" },
-  { label: "Campuses", href: "/campuses" },
-  { label: "VCAD Life", href: "/vcad-life", hasSubmenu: true },
+  { label: "Features", href: "/#features" },
+  { label: "How it works", href: "/#how-it-works" },
 ];
 
-/** Homepage-only nav — simpler set, no "Apply Now" CTA. */
-export const homeNav: NavLink[] = [
-  { label: "About VCAD", href: "/about" },
-  { label: "Courses", href: "/courses" },
-  { label: "Contact Us", href: "/contact" },
-];
+export const homeNav: NavLink[] = primaryNav;
