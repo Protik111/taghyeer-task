@@ -147,6 +147,14 @@ export default function GroupInfoPanel({
               placeholder="Search by name or phone number"
               className="w-full rounded-chip border border-border bg-navy/40 px-3 py-2 text-default text-white placeholder:text-sky/60 focus:border-plum focus:outline-none"
             />
+            {search.query.trim().length < 2 && (
+              <p className="px-1 text-meta text-sky/70">Type at least 2 characters to search.</p>
+            )}
+            {search.loading && <p className="px-1 text-meta text-sky/70">Searching…</p>}
+            {search.error && <p className="px-1 text-meta text-pink">{search.error}</p>}
+            {!search.loading && search.query.trim().length >= 2 && search.results.length === 0 && (
+              <p className="px-1 text-meta text-sky/70">No one matches “{search.query}”.</p>
+            )}
             <ul className="max-h-40 overflow-y-auto">
               {search.results.map((u) => (
                 <li key={u.id}>
