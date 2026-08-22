@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import VerticalLines from "@/components/ui/VerticalLines";
+import { AuthProvider } from "@/contexts/AuthContext";
 import "./globals.css";
 
 const inter = Inter({
@@ -13,16 +13,11 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "VCAD — Victoria College of Arts and Design",
-    template: "%s | VCAD",
+    default: "Loopin — real-time chat",
+    template: "%s | Loopin",
   },
   description:
-    "Victoria College of Arts and Design (VCAD) is a creative college in London's Design District, offering courses in fashion, graphic design, media, business and marketing.",
-  icons: {
-    icon: "/images/logo.svg",
-    shortcut: "/images/logo.svg",
-    apple: "/images/logo.svg",
-  },
+    "Loopin is a real-time 1-to-1 and group chat app: instant messaging, live delivery, and simple phone-number sign-in.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -36,10 +31,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         suppressHydrationWarning
         className="relative flex min-h-full flex-col bg-base font-sans text-text"
       >
-        {/* <VerticalLines /> */}
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <AuthProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );
