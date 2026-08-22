@@ -3,9 +3,15 @@
 A real-time 1-to-1 and group chat app — take-home assignment (Senior Frontend
 Developer). Frontend only; the API is a provided third-party service.
 
+> ### 📄 [`docs/API.md`](./docs/API.md) — API documentation (Part 1's standalone deliverable)
+>
+> Written from directly testing the live API with `curl`, not just the
+> provided Postman collection — every endpoint's request/response shape,
+> every error code, the Socket.IO events, and a "Notes & deviations"
+> section covering every real inconsistency this API turned out to have.
+
 - **Live app (Part 1):** _add your deployed URL here_
 - **Landing page (Part 2):** same deployment, at `/` (the chat screens live at `/login` and `/chat`)
-- **API documentation (Part 1's standalone deliverable):** [`docs/API.md`](./docs/API.md)
 - **Repo:** this one
 
 ## Tech stack
